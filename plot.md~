@@ -1,0 +1,51 @@
+---
+title: 画图那些事儿
+categories: pandas
+tag: 
+  - plot
+---
+
+```python
+import matplotlib
+from numpy.random import randn
+import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
+from pandas import DataFrame
+```
+
+
+```python
+def to_percent(y, position):
+    s = str(100 * y)
+
+    if matplotlib.rcParams['text.usetex'] is True:
+        return s + r'$\%$'
+    else:
+        return s + '%'
+```
+
+
+```python
+df = DataFrame({'kind1':[1,2,3,4,5,6,7,8,9]})
+```
+
+
+```python
+% matplotlib inline
+```
+
+
+```python
+df.plot()
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7f056ef29550>
+
+
+
+
+{% asset_img plot_4_1.png 图例 %}
+
