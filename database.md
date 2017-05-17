@@ -1,0 +1,137 @@
+---
+title: python与数据库的连接与使用
+categories: database
+tag: 
+  - oracle
+  - mysql
+  - mangodb
+---
+
+```python
+import os
+os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
+```
+
+#  oracle与mysql数据库
+
+## 定义好url
+
+
+```python
+engine_url = {
+    'oracle': 'oracle://[user]:[password]@ip地址/SID或者SERVICE NAME',
+    'mysql':'mysql://[user]:[password]@ip地址:端口号/数据库名'    
+}
+```
+
+## oracle连接
+<!--more-->
+
+```python
+engine_oracle = create_engine(engine_url['oracle'])
+meta_data = MetaData()
+[table_name] = Table(数据库中的表名称,meta_data,autoload = True, autoload_with = engine_oracle, schema = schema的名字)
+```
+
+## mysql连接
+
+
+```python
+import pymysql
+pymysql.install_as_MySQLdb()
+
+engine_mysql = create_engine(engine_url['mysql'])
+meta_data = MetaData()
+```
+
+## 取数（oracle和mysql一样)
+
+### 编写sql语句
+
+
+```python
+# 方法1—直接编写原生sql
+sql = '''
+SELECT
+    all_tab_cols.OWNER schema_name,
+    all_tab_cols.TABLE_NAME table_name,
+    all_tab_cols.COLUMN_NAME column_name,
+    all_tab_cols.DATA_TYPE data_type,
+    all_col_comments.COMMENTS data_comment
+FROM
+    all_tab_cols
+JOIN
+    all_col_comments
+ON
+    all_tab_cols.OWNER = all_col_comments.OWNER and
+    all_tab_cols.TABLE_NAME = all_col_comments.TABLE_NAME and
+    all_tab_cols.COLUMN_NAME = all_col_comments.COLUMN_NAME
+'''
+
+# 方法2—sqlalchemy
+all_tab_cols = Table('all_tab_cols',meta_data,autoload = True, autoload_with = engine_oracle, schema = 数据库的名字)
+all_col_comments = Table('all_col_comments',meta_data,autoload = True, autoload_with = engine_oracle, schema = 数据库的名字)
+
+sql = select(
+    [
+        all_tab_cols.c.owner.label('schema_name'),
+        all_tab_cols.c.table_name,
+        all_tab_cols.c.column_name,
+        all_tab_cols.c.data_type,
+        all_col_comments.c.comments.label('data_comment'),
+        
+    ]
+)select_from(
+    all_tab_cols.outerjoin(
+        all_col_comments,
+        and_(
+            all_tab_cols.c.owner==all_col_comments.c.owner,
+            all_tab_cols.c.table_name==all_col_comments.c.table_name,
+            all_tab_cols.c.column_name==all_col_comments.c.column_name
+        )
+    )
+)
+```
+
+### 读数据
+
+
+```python
+# 方法一:用with,此方法读出来的数据的column是给定的数字，所以需要rename
+with engine_oracle.connect() as conn:
+    try:
+        result = conn.execute(sql)
+    except Exception as e:
+        print(e)
+df=DataFrame.from_records(result.fetchall(),columns = {0:'schema',1:'table',2:"column",3:'data_type',4:'comment'})
+
+# 方法二：用pd.read_sql
+df = pd.read_sql(sql,engine_oracle)
+```
+
+# mangodb
+
+## 连接
+
+
+```python
+from pymongo import MongoClient
+import pymongo
+
+client = MongoClient(host=ip地址, port=端口号)
+db = client.get_database(数据库名)
+collection = db[表名]
+```
+
+## 取数
+
+
+```python
+cursor = collection.find()
+
+list_data=[]
+for data in cursor:
+    df = DataFrame(data,index=[0])
+    list_data.append(df)
+result = pd.concat(list_data,ignore_index=True)
+```
