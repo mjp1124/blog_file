@@ -75,10 +75,6 @@ from pandas import DataFrame
 df = DataFrame({'kind':['kind1','kind2','kind3'],'num1':[1,2,3],'num2':[0.4,0.5,0.6]})
 df
 ```
-
-
-
-
 <div>
 <table border="1" class="dataframe">
   <thead>
@@ -111,8 +107,6 @@ df
   </tbody>
 </table>
 </div>
-
-
 
 ## 柱状图
 
@@ -240,10 +234,6 @@ plt.rcParams['figure.titlesize'] = 20
 df = DataFrame({'kind':['a','b','c'],'False':[0.1,0.9,0.5],'True':[0.9,0.1,0.5]})[['kind','True','False']]
 df
 ```
-
-
-
-
 <div>
 <table border="1" class="dataframe">
   <thead>
@@ -276,9 +266,6 @@ df
   </tbody>
 </table>
 </div>
-
-
-
 
 ```python
 fig, ax = plt.subplots(figsize=(10, 5))

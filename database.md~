@@ -1,4 +1,11 @@
-
+---
+title: python与数据库的连接与使用
+categories: database
+tags: 
+  - oracle
+  - mysql
+  - mangodb
+---
 
 ```python
 import os
@@ -18,7 +25,7 @@ engine_url = {
 ```
 
 ## oracle连接
-
+<!--more-->
 
 ```python
 engine_oracle = create_engine(engine_url['oracle'])

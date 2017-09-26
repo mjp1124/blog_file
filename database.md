@@ -1,7 +1,8 @@
 ---
 title: python与数据库的连接与使用
 categories: database
-tag: 
+date: 2017-05-10
+tags: 
   - oracle
   - mysql
   - mangodb
