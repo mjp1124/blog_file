@@ -1,3 +1,14 @@
+---
+title: 随机森林与GBDT简单对比及代码样例
+categories: model
+date: 2017-09-23
+tags: 
+  - model
+  - Random Forest
+  - GBDT
+---
+
+本文简单对比了随机森林与GBDT模型的优缺点，并列举了两种模型的样例的模型效果
 
 # 随机森林(Random Forest)
 * 随机森林指的是利用多棵树对样本进行训练并预测的一种分类器，随机森林的每一棵决策树之间是没有关联的
@@ -203,237 +214,7 @@ model_data.head()
 ```python
 model_data.describe()
 ```
-
-
-
-
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Var1</th>
-      <th>Var2</th>
-      <th>Var3</th>
-      <th>Var4</th>
-      <th>Var5</th>
-      <th>Var6</th>
-      <th>Var7</th>
-      <th>Var8</th>
-      <th>Var9</th>
-      <th>Var10</th>
-      <th>...</th>
-      <th>Var36</th>
-      <th>Var37</th>
-      <th>Var38</th>
-      <th>Var39</th>
-      <th>Var40</th>
-      <th>Var41</th>
-      <th>Var42</th>
-      <th>Var43</th>
-      <th>Var44</th>
-      <th>tag_y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>...</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-      <td>4998.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>2.041216</td>
-      <td>-0.649060</td>
-      <td>4.728491</td>
-      <td>1.139256</td>
-      <td>2.990396</td>
-      <td>569.367147</td>
-      <td>1.391557</td>
-      <td>48.263305</td>
-      <td>29.134854</td>
-      <td>1.125250</td>
-      <td>...</td>
-      <td>0.062425</td>
-      <td>0.336335</td>
-      <td>0.113245</td>
-      <td>0.013405</td>
-      <td>0.669268</td>
-      <td>0.835934</td>
-      <td>37.605242</td>
-      <td>30.880752</td>
-      <td>0.867347</td>
-      <td>0.299920</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>1.000451</td>
-      <td>1.001145</td>
-      <td>19.438426</td>
-      <td>2.393001</td>
-      <td>0.195783</td>
-      <td>368.552483</td>
-      <td>1.190208</td>
-      <td>20.310909</td>
-      <td>39.679275</td>
-      <td>0.500069</td>
-      <td>...</td>
-      <td>0.241950</td>
-      <td>0.472502</td>
-      <td>0.316924</td>
-      <td>0.115014</td>
-      <td>0.470524</td>
-      <td>0.370372</td>
-      <td>12.433905</td>
-      <td>5.657507</td>
-      <td>0.339233</td>
-      <td>0.458268</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>-1.000000</td>
-      <td>-1.000000</td>
-      <td>-1.000000</td>
-      <td>-1.000000</td>
-      <td>-1.000000</td>
-      <td>-140.000000</td>
-      <td>-1.000000</td>
-      <td>-1.000000</td>
-      <td>-1.000000</td>
-      <td>-1.000000</td>
-      <td>...</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>11.000000</td>
-      <td>20.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>1.000000</td>
-      <td>-1.000000</td>
-      <td>-1.000000</td>
-      <td>-1.000000</td>
-      <td>3.000000</td>
-      <td>256.250000</td>
-      <td>1.000000</td>
-      <td>50.000000</td>
-      <td>-1.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>32.000000</td>
-      <td>27.000000</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>2.000000</td>
-      <td>-1.000000</td>
-      <td>-1.000000</td>
-      <td>1.000000</td>
-      <td>3.000000</td>
-      <td>545.000000</td>
-      <td>1.000000</td>
-      <td>51.000000</td>
-      <td>-1.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>41.000000</td>
-      <td>30.000000</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>3.000000</td>
-      <td>-1.000000</td>
-      <td>-1.000000</td>
-      <td>4.000000</td>
-      <td>3.000000</td>
-      <td>854.000000</td>
-      <td>2.000000</td>
-      <td>62.000000</td>
-      <td>76.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>44.000000</td>
-      <td>34.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>3.000000</td>
-      <td>3.000000</td>
-      <td>100.000000</td>
-      <td>5.000000</td>
-      <td>3.000000</td>
-      <td>1465.000000</td>
-      <td>3.000000</td>
-      <td>65.000000</td>
-      <td>100.000000</td>
-      <td>3.000000</td>
-      <td>...</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>65.000000</td>
-      <td>50.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
-</table>
-<p>8 rows × 45 columns</p>
-</div>
-
-
+{% asset_img 描述.png 描述性统计 %}
 
 ## 变量相关性检验
 
@@ -1094,12 +875,7 @@ plt.show()
 plt.savefig('随机森林ROC曲线.png')
 ```
 
-
-![png](model_files/model_15_0.png)
-
-
-
-    <matplotlib.figure.Figure at 0x7f10224b1c50>
+{% asset_img model_15_0.png 随机森林ROC曲线 %} 
 
 
 ### K-S值和K-S曲线
@@ -1134,13 +910,7 @@ plt.legend(loc="lower right")
 plt.show()
 plt.savefig('随机森林KS曲线.png')
 ```
-
-
-![png](model_files/model_18_0.png)
-
-
-
-    <matplotlib.figure.Figure at 0x7f1020b9beb8>
+{% asset_img model_18_0.png 随机森林KS曲线 %} 
 
 
 ### PRC曲线与f1_score曲线
@@ -1167,12 +937,7 @@ plt.show()
 plt.savefig('随机森林PRC曲线.png')
 ```
 
-
-![png](model_files/model_21_0.png)
-
-
-
-    <matplotlib.figure.Figure at 0x7f1020c2a940>
+{% asset_img model_21_0.png 随机森林PRC曲线 %} 
 
 
 
@@ -1190,13 +955,7 @@ plt.legend(loc="middle right")
 plt.show()
 plt.savefig('随机森林f1_score曲线.png')
 ```
-
-
-![png](model_files/model_22_0.png)
-
-
-
-    <matplotlib.figure.Figure at 0x7f1022498438>
+{% asset_img model_22_0.png 随机森林f1_score曲线 %} 
 
 
 
@@ -1241,8 +1000,7 @@ f1 = line_plot(plot_x, plot_y, title, x_label, y_label, anatations)
 plt.savefig('随机森林阈值.png')
 ```
 
-
-![png](model_files/model_26_0.png)
+{% asset_img model_26_0.png 随机森林阈值 %} 
 
 
 # 梯度提升树GBDT (Gradient Boosting Decision Tree)
@@ -1415,13 +1173,7 @@ plt.legend(loc="lower right")
 plt.show()
 plt.savefig('GBDT_ROC曲线.png')
 ```
-
-
-![png](model_files/model_38_0.png)
-
-
-
-    <matplotlib.figure.Figure at 0x7f102257da90>
+{% asset_img model_38_0.png GBDT_ROC曲线 %} 
 
 
 ### K-S值和K-S曲线
@@ -1456,13 +1208,7 @@ plt.legend(loc="lower right")
 plt.show()
 plt.savefig('GBDT_KS曲线.png')
 ```
-
-
-![png](model_files/model_41_0.png)
-
-
-
-    <matplotlib.figure.Figure at 0x7f102258b4e0>
+{% asset_img model_41_0.png GBDT_KS曲线 %} 
 
 
 ### PRC曲线与f1_score曲线
@@ -1489,8 +1235,7 @@ plt.show
 plt.savefig('GBDT_PRC曲线.png')
 ```
 
-
-![png](model_files/model_44_0.png)
+{% asset_img model_44_0.png GBDT_PRC曲线 %} 
 
 
 
@@ -1509,12 +1254,7 @@ plt.show()
 plt.savefig('GBDT_f1_score曲线.png')
 ```
 
-
-![png](model_files/model_45_0.png)
-
-
-
-    <matplotlib.figure.Figure at 0x7f10589cc940>
+{% asset_img model_45_0.png GBDT_f1_score曲线 %}
 
 
 ### 阈值选取问题
@@ -1537,8 +1277,7 @@ f1 = line_plot(plot_x, plot_y, title, x_label, y_label, anatations)
 plt.savefig('GBDT阈值.png')
 ```
 
-
-![png](model_files/model_47_0.png)
+{% asset_img model_47_0.png GBDT阈值 %}
 
 
 ### 自动调参
@@ -1582,21 +1321,12 @@ grid_search.fit(X_train,pd.Series(y_train))
 grid_search.best_score_
 ```
 
-
-
-
     0.7763881940970485
-
-
-
 
 ```python
 #输出最佳参数
 grid_search.best_params_
 ```
-
-
-
 
     {'max_depth': 5, 'max_features': 9, 'n_estimators': 100}
 
