@@ -1,6 +1,6 @@
 ---
 title: 利用pandas进行数据分析的常用小功能
-categories: pandas
+categories: analysis
 date: 2017-05-18
 tags: 
   - pandas

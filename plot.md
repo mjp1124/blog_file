@@ -1,6 +1,6 @@
 ---
 title: 数据分析中利用matplotlib画图
-categories: pandas
+categories: analysis
 date: 2017-05-19
 tags: 
   - plot

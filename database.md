@@ -110,7 +110,7 @@ df=DataFrame.from_records(result.fetchall(),columns = {0:'schema',1:'table',2:"c
 df = pd.read_sql(sql,engine_oracle)
 ```
 
-# mangodb
+# mongodb
 
 ## 连接
 
