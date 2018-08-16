@@ -15,12 +15,14 @@ tags:
 * 重启服务器: sudo reboot 
 * 虚拟环境
     * 安装: pip3 install virtualenv
-    * 新建: virtualenv -p [虚拟环境存放的目标位置]
+    * 新建: virtualenv -p /usr/bin/python3　[虚拟环境存放的目标位置]
     * 启动: source [目标位置/bin/activate]　
+    * 退出: deactivate
     * 自己编写的函数包，可以放在虚拟环境下的lib/python环境中的site-packages中
     * 指定调用的包的路径：site-packages mylib.pth中编写
 * bashrc文件定义短句样例: alias jter='jupyter notebook'
 <!--more-->
+
 ### git
 * 比较文件区别： git diff [文件１]　[文件2] #git diff master比较的是历史区和工作区的差异
 * 查看版本号： git log --graph
